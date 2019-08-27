@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.BL.Model;
 
 namespace Shop.BL.Product
 {
@@ -21,6 +22,10 @@ namespace Shop.BL.Product
             Manufacturer = manufacturer;
             Price = price;
             Composition = composition;
+        }
+        public override double GetDiscountPrice(User user)
+        {
+            return Price/5;
         }
     }
 }
