@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Shop.Bl.Model;
 using Shop.BL.Model;
 using Shop.BL.Product;
+using Shop.CMD.Interfaces;
+using Shop.CMD.Model;
+using Shop.CMD.ProductCMD;
 
 namespace Shop.CMD
 {
@@ -20,66 +23,43 @@ namespace Shop.CMD
                 550
                 );
 
-            Console.WriteLine("Список товаров:");
 
-
-            Keyboard keyBor = new Keyboard(
+            Keyboard keyBor = new KeyboardCMD(
                 "Ультра Клавиатура!",
                 400,
                 "Log",
                 25
                 );
 
-            Console.WriteLine("Клавиатура:");
-            Console.WriteLine("Название: " + keyBor.Name);
-            Console.WriteLine("Цена: " + keyBor.Price);
-            Console.WriteLine("Производитель: " + keyBor.Manufacturer);
-            Console.WriteLine("Размер: " + keyBor.NumberOfKeys);
-            Console.WriteLine(new String('-', 25));
-
-            Mouse mouseGeat = new Mouse(
+            Mouse mouseGeat = new MouseCMD(
                 "Мышь крутая",
                 500,
                 "Log"
                 );
 
-            Console.WriteLine("Мышь:");
-            Console.WriteLine("Название: " + mouseGeat.Name);
-            Console.WriteLine("Цена: " + mouseGeat.Price);
-            Console.WriteLine("Производитель: " + mouseGeat.Manufacturer);
-            Console.WriteLine(new String('-', 25));
-
-            MousePad gamePad = new MousePad(
+            MousePad gamePad = new MousePadCMD(
                 "Супер коврик",
                 700,
                 "Game",
                 "700 pdi"
                 );
-
-            Console.WriteLine("Коврик для мыши:");
-            Console.WriteLine("Название: " + gamePad.Name);
-            Console.WriteLine("Цена: " + gamePad.Price);
-            Console.WriteLine("Производитель: " + gamePad.Manufacturer);
-            Console.WriteLine("Состав: " + gamePad.Composition);
-            Console.WriteLine(new String('-', 25));
-
+           
 
             Product[] products = new Product[] {
                 keyBor,
                 mouseGeat,
                 gamePad,
             };
-            Console.WriteLine(new String('-', 25));
-            foreach (var item in products)
-            {
-                Console.WriteLine($"nameof({nameof(item)})");
-                Console.WriteLine($"GetType({item.GetType()})");
-            }
-            Console.WriteLine(new String('-', 25));
             Informer informer = new Informer();
 
             while (true)
             {
+                Console.WriteLine("Список товаров:");
+                foreach (var product in products)
+                {
+                    ((IToConsole)product).ToConsole();
+                    Console.WriteLine(new String('-', 25));
+                }
                 Console.WriteLine();
                 Console.WriteLine($"Здравствуйте {user.Name} ваш баланс {user.Balance}");
 
@@ -91,13 +71,15 @@ namespace Shop.CMD
 
                 string str = Console.ReadLine();
                 int productNumber = Convert.ToInt32(str);
-
+                Console.Clear();
                 if (productNumber >= 0 && productNumber < products.Length)
                 {
 
                     if (products[productNumber].Price < user.Balance)
                     {
+                        
                         informer.Buy(user, products[productNumber]);
+                        Console.WriteLine();
                     }
                     else
                     {
