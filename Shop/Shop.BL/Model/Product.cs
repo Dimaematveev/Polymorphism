@@ -29,7 +29,7 @@ namespace Shop.BL.Model
         /// </summary>
         /// <param name="user">Пользователь покупающий товар.</param>
         /// <returns>Цена товара.</returns>
-        public virtual double GetDiscountPrice(User user)
+       internal virtual double GetDiscountPrice(User user)
         {
             if (user.Spent < 300)
             {

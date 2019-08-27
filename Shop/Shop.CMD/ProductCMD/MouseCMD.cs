@@ -1,4 +1,5 @@
-﻿using Shop.BL.Product;
+﻿using Shop.BL.Model;
+using Shop.BL.Product;
 using Shop.CMD.Interfaces;
 using System;
 using System.Collections.Generic;
