@@ -50,6 +50,8 @@ namespace Shop.CMD
                 mouseGeat,
                 gamePad,
             };
+            Product product1 = new Model.ProductCMD();
+            product1 = keyBor;
             Informer informer = new Informer();
 
             while (true)
