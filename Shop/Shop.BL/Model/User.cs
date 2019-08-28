@@ -9,6 +9,7 @@ namespace Shop.BL.Model
     /// <summary>
     /// Пользователь
     /// </summary>
+    [Serializable]
     public abstract class User
     {
         /// <summary>
@@ -19,8 +20,11 @@ namespace Shop.BL.Model
         /// Пароль
         /// </summary>
         private string Password {  get;  set; }
-       
 
+        public User(string name)
+        {
+            Name = name;
+        }
         public User(
             string name,
             string passwordNew,
@@ -49,6 +53,15 @@ namespace Shop.BL.Model
             {
                 throw new ArgumentException("Старый пароль введен неверно!!!");
             }
+        }
+
+        public User GetUser(string password)
+        {
+            if (this.Password == password) 
+            {
+                return this;
+            }
+            return null;
         }
     }
 }

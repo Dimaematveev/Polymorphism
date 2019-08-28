@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shop.Bl.Model;
+using Shop.BL.Controller;
 using Shop.BL.Model;
 using Shop.BL.Product;
 using Shop.BL.User;
@@ -18,6 +19,27 @@ namespace Shop.CMD
         static void Main(string[] args)
         {
             Buyer buyer = new Buyer("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
+           
+            Console.WriteLine("Введите имя пользователя:");
+            string nameUser = Console.ReadLine();
+            UserController userController = new UserController(nameUser);
+
+            if (userController.NewUser)
+            {
+                Console.WriteLine("Новый пользователь!");
+                Console.WriteLine("Введите пароль пользователя");
+                string passNew = Console.ReadLine();
+                Console.WriteLine("Повторите пароль пользователя");
+                string passRet = Console.ReadLine();
+                userController.AddNewUser(nameUser,passNew, passRet);
+                userController.SelectUser(passNew);
+            }
+            else
+            {
+                Console.WriteLine("Введите пароль пользователя");
+                string pass = Console.ReadLine();
+                userController.SelectUser(pass);
+            }
 
             Product keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 

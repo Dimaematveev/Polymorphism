@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.BL.User
 {
+    [Serializable]
     public class Buyer : Model.User
     {
         /// <summary>
@@ -15,11 +16,16 @@ namespace Shop.BL.User
         /// <summary>
         /// Сколько денег на счету.
         /// </summary>
-        public double Balance { get; private set; }
+        public double Balance { get; private set; } = 0;
         /// <summary>
         /// Сколько всего потратил.
         /// </summary>
-        public double Spent { get; private set; }
+        public double Spent { get; private set; } = 0;
+        public Buyer(string name) : base(name){ }
+        public Buyer(
+            string name,
+            string passwordNew,
+            string passwordReplay) : base(name, passwordNew, passwordReplay) { }
         public Buyer(
             string name,
             string passwordNew,

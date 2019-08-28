@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Shop.BL.User
 {
+    [Serializable]
     public class Admin : Model.User
     {
         private int AccessRights { get; set; } = 0;
         public Admin(
             string name,
             string passwordNew,
-            string passwordReplay,
-            string adress,
-            int balance,
-            int spent) : base(name, passwordNew, passwordReplay)
+            string passwordReplay) : base(name, passwordNew, passwordReplay)
         {
         }
     }
