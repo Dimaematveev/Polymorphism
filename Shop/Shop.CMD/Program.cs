@@ -16,33 +16,14 @@ namespace Shop.CMD
     {
         static void Main(string[] args)
         {
-            User user = new User(
-                "Artem",
-                "Улица Пушкина, дом Колотушкина",
-                100000,
-                550
-                );
+            User user = new User("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
+            user.ChangePassword("12345", "1", "1");
 
+            Keyboard keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 
-            Keyboard keyBor = new KeyboardCMD(
-                "Ультра Клавиатура!",
-                400,
-                "Log",
-                25
-                );
+            Mouse mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );
 
-            Mouse mouseGeat = new MouseCMD(
-                "Мышь крутая",
-                500,
-                "Log"
-                );
-
-            MousePad gamePad = new MousePadCMD(
-                "Супер коврик",
-                700,
-                "Game",
-                "700 pdi"
-                );
+            MousePad gamePad = new MousePadCMD(   "Супер коврик",  700,  "Game",  "700 pdi"  );
            
 
             Product[] products = new Product[] {

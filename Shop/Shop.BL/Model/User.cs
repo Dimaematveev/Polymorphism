@@ -16,6 +16,10 @@ namespace Shop.BL.Model
         /// </summary>
         public string Name { get; private set; }
         /// <summary>
+        /// Пароль
+        /// </summary>
+        private string Password {  get;  set; }
+        /// <summary>
         /// Адрес.
         /// </summary>
         public string Adress { get; private set; }
@@ -28,9 +32,10 @@ namespace Shop.BL.Model
         /// </summary>
         public double Spent { get; private set; }
 
-        public User(string name, string adress, int balance, int spent)
+        public User(string name, string passwordNew, string passwordReplay, string adress, int balance, int spent)
         {
             Name = name;
+            ChangePassword(null, passwordNew, passwordReplay);
             Adress = adress;
             Balance = balance;
             Spent = spent;
@@ -44,6 +49,26 @@ namespace Shop.BL.Model
         {
             Balance -= price;
             Spent += price;
+        }
+
+        public void ChangePassword(string passwordOdl, string passwordNew, string passwordReplay)
+        {
+            if (Password == passwordOdl)
+            {
+                if (passwordNew == passwordReplay) 
+                {
+                    Password = passwordNew;
+                    return;
+                }
+                else
+                {
+                    throw new ArgumentException("Неверно повторили пароль!!!");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Старый пароль введен неверно!!!");
+            }
         }
     }
 }
