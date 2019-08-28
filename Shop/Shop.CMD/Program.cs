@@ -119,6 +119,7 @@ namespace Shop.CMD
                 else
                 {
                     Console.WriteLine("Таких товаров нет");
+
                 }
             }
         }
