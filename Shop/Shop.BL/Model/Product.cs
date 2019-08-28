@@ -10,6 +10,7 @@ namespace Shop.BL.Model
     /// <summary>
     /// Продукт.
     /// </summary>
+    [Serializable]
     public abstract class Product
     {
         /// <summary>

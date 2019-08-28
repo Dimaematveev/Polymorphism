@@ -10,30 +10,25 @@ namespace Shop.BL.Controller
 {
     public abstract class BaseController
     {
-        public List<Model.User> Load()
+        public T Load<T>(string pathFile)
         {
             // создаем объект BinaryFormatter
             BinaryFormatter formatter = new BinaryFormatter();
-            var varible = new List<Model.User>();
+            T varible;
             // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream("Users.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(pathFile, FileMode.OpenOrCreate))
             {
-                varible=(List<Model.User>)formatter.Deserialize(fs);
+                varible=(T)formatter.Deserialize(fs);
             }
             return varible;
             
         }
-        public void Load(List<Model.Product> varible) 
-        {
-            varible = default(List<Model.Product>);
-
-        }
-        public void Save(List<Model.User> Users)
+        public void Save<T>(T Users, string pathFile)
         {
             // создаем объект BinaryFormatter
             BinaryFormatter formatter = new BinaryFormatter();
             // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream("Users.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(pathFile, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, Users);
             }

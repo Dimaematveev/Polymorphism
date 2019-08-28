@@ -9,6 +9,7 @@ namespace Shop.BL.Product
     /// <summary>
     /// Клавиатура.
     /// </summary>
+    [Serializable]
     public class Keyboard: Model.Product
     {
         /// <summary>

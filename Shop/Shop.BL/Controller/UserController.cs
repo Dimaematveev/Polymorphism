@@ -9,15 +9,16 @@ namespace Shop.BL.Controller
 {
     public class UserController: BaseController
     {
-        public List<Model.User> Users;
+        private const string USERS_PACH_NAME = "Users.dat";
+        private List<Model.User> Users;
         public Model.User CurrentUser;
-        private int ind = -1;
-        public bool NewUser { get => ind == -1; }
+        
+        public bool NewUser=false;
 
         public UserController(string name)
         {
-            Users=Load();
-            ind = Users.FindIndex(u => u.Name == name);
+            Users=Load<List<Model.User>>(USERS_PACH_NAME);
+            NewUser= (Users.FindIndex(u => u.Name == name)==-1);
            
         }
 
@@ -25,12 +26,13 @@ namespace Shop.BL.Controller
         {
             CurrentUser = new User.Buyer(name, passwordNew, passwordReplay);
             Users.Add(CurrentUser);
-            Save(Users);
-            ind = Users.Count - 1;
+            Save(Users, USERS_PACH_NAME);
+            NewUser = false;
+            SelectUser(name, passwordNew);
         }
-        public void SelectUser(string password)
+        public void SelectUser(string name, string password)
         {
-            CurrentUser = Users[ind].GetUser(password);
+            CurrentUser = Users.Find(u=>u.Name==name).GetUser(password);
         }
 
     

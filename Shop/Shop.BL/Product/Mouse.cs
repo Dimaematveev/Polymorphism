@@ -9,6 +9,7 @@ namespace Shop.BL.Product
     /// <summary>
     /// Мышь.
     /// </summary>
+    [Serializable]
     public class Mouse: Model.Product
     {
         public Mouse(string name, int price, string manufacturer)

@@ -34,13 +34,13 @@ namespace Shop.CMD
                     Console.WriteLine("Повторите пароль пользователя");
                     string passRet = Console.ReadLine();
                     userController.AddNewUser(nameUser,passNew, passRet);
-                    userController.SelectUser(passNew);
+                    userController.SelectUser(nameUser,passNew);
                 }
                 else
                 {
                     Console.WriteLine("Введите пароль пользователя");
                     string pass = Console.ReadLine();
-                    userController.SelectUser(pass);
+                    userController.SelectUser(nameUser, pass);
                 }
                 if (userController.CurrentUser==null)
                 {
@@ -54,7 +54,7 @@ namespace Shop.CMD
                     Console.WriteLine("Доступ разрешен!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-            } while (true);
+            } while (false);
             Product keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 
             Product mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );

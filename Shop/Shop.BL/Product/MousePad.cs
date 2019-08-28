@@ -10,6 +10,7 @@ namespace Shop.BL.Product
     /// <summary>
     /// Коврик для мыши.
     /// </summary>
+    [Serializable]
     public class MousePad: Model.Product
     {
         /// <summary>
