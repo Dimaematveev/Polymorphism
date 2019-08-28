@@ -19,28 +19,42 @@ namespace Shop.CMD
         static void Main(string[] args)
         {
             Buyer buyer = new Buyer("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
-           
-            Console.WriteLine("Введите имя пользователя:");
-            string nameUser = Console.ReadLine();
-            UserController userController = new UserController(nameUser);
 
-            if (userController.NewUser)
+            do
             {
-                Console.WriteLine("Новый пользователь!");
-                Console.WriteLine("Введите пароль пользователя");
-                string passNew = Console.ReadLine();
-                Console.WriteLine("Повторите пароль пользователя");
-                string passRet = Console.ReadLine();
-                userController.AddNewUser(nameUser,passNew, passRet);
-                userController.SelectUser(passNew);
-            }
-            else
-            {
-                Console.WriteLine("Введите пароль пользователя");
-                string pass = Console.ReadLine();
-                userController.SelectUser(pass);
-            }
+                Console.WriteLine("Введите имя пользователя:");
+                string nameUser = Console.ReadLine();
+                UserController userController = new UserController(nameUser);
 
+                if (userController.NewUser)
+                {
+                    Console.WriteLine("Новый пользователь!");
+                    Console.WriteLine("Введите пароль пользователя");
+                    string passNew = Console.ReadLine();
+                    Console.WriteLine("Повторите пароль пользователя");
+                    string passRet = Console.ReadLine();
+                    userController.AddNewUser(nameUser,passNew, passRet);
+                    userController.SelectUser(passNew);
+                }
+                else
+                {
+                    Console.WriteLine("Введите пароль пользователя");
+                    string pass = Console.ReadLine();
+                    userController.SelectUser(pass);
+                }
+                if (userController.CurrentUser==null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Неправильный пароль!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Доступ разрешен!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            } while (true);
             Product keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 
             Product mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );
