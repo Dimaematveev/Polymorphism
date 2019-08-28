@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Shop.Bl.Model;
 using Shop.BL.Model;
 using Shop.BL.Product;
+using Shop.BL.User;
 using Shop.CMD.Interfaces;
 using Shop.CMD.Model;
 using Shop.CMD.ProductCMD;
@@ -16,14 +17,13 @@ namespace Shop.CMD
     {
         static void Main(string[] args)
         {
-            User user = new User("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
-            user.ChangePassword("12345", "1", "1");
+            Buyer buyer = new Buyer("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
 
-            Keyboard keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
+            Product keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 
-            Mouse mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );
+            Product mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );
 
-            MousePad gamePad = new MousePadCMD(   "Супер коврик",  700,  "Game",  "700 pdi"  );
+            Product gamePad = new MousePadCMD(   "Супер коврик",  700,  "Game",  "700 pdi"  );
            
 
             Product[] products = new Product[] {
@@ -44,7 +44,7 @@ namespace Shop.CMD
                     Console.WriteLine(new String('-', 25));
                 }
                 Console.WriteLine();
-                Console.WriteLine($"Здравствуйте {user.Name} ваш баланс {user.Balance}");
+                Console.WriteLine($"Здравствуйте {buyer.Name} ваш баланс {buyer.Balance}");
 
                 for (int i = 0; i < products.Length; i++)
                 {
@@ -58,10 +58,10 @@ namespace Shop.CMD
                 if (productNumber >= 0 && productNumber < products.Length)
                 {
 
-                    if (products[productNumber].Price < user.Balance)
+                    if (products[productNumber].Price < buyer.Balance)
                     {
                         
-                        informer.Buy(user, products[productNumber]);
+                        informer.Buy(buyer, products[productNumber]);
                         Console.WriteLine();
                     }
                     else

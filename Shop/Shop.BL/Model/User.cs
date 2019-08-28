@@ -9,7 +9,7 @@ namespace Shop.BL.Model
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class User
+    public abstract class User
     {
         /// <summary>
         /// Имя.
@@ -19,38 +19,18 @@ namespace Shop.BL.Model
         /// Пароль
         /// </summary>
         private string Password {  get;  set; }
-        /// <summary>
-        /// Адрес.
-        /// </summary>
-        public string Adress { get; private set; }
-        /// <summary>
-        /// Сколько денег на счету.
-        /// </summary>
-        public double Balance { get; private set; }
-        /// <summary>
-        /// Сколько всего потратил.
-        /// </summary>
-        public double Spent { get; private set; }
+       
 
-        public User(string name, string passwordNew, string passwordReplay, string adress, int balance, int spent)
+        public User(
+            string name,
+            string passwordNew,
+            string passwordReplay)
         {
             Name = name;
             ChangePassword(null, passwordNew, passwordReplay);
-            Adress = adress;
-            Balance = balance;
-            Spent = spent;
         }
 
-        /// <summary>
-        /// Покупка на сумму.
-        /// </summary>
-        /// <param name="price">Сумма.</param>
-        public void ReduceBalance(double price)
-        {
-            Balance -= price;
-            Spent += price;
-        }
-
+       
         public void ChangePassword(string passwordOdl, string passwordNew, string passwordReplay)
         {
             if (Password == passwordOdl)

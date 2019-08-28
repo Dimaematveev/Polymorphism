@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.BL.User;
 
 namespace Shop.BL.Model
 {
     /// <summary>
     /// Продукт.
     /// </summary>
-    public class Product
+    public abstract class Product
     {
         /// <summary>
         /// Цена.
@@ -29,14 +30,14 @@ namespace Shop.BL.Model
         /// </summary>
         /// <param name="user">Пользователь покупающий товар.</param>
         /// <returns>Цена товара.</returns>
-       internal virtual double GetDiscountPrice(User user)
+       internal virtual double GetDiscountPrice(Buyer buyer)
         {
-            if (user.Spent < 300)
+            if (buyer.Spent < 300)
             {
                 return Price;
             }
 
-            if (user.Spent < 1000)
+            if (buyer.Spent < 1000)
             {
                 return Price * 0.9;
             }

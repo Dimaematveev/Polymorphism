@@ -1,4 +1,5 @@
 ﻿using Shop.BL.Model;
+using Shop.BL.User;
 using System;
 
 namespace Shop.Bl.Model
@@ -11,16 +12,16 @@ namespace Shop.Bl.Model
         /// <summary>
         /// Покупка.
         /// </summary>
-        /// <param name="user">Покупатель.</param>
+        /// <param name="buyer">Покупатель.</param>
         /// <param name="product">Товар.</param>
-        public void Buy(User user, Product product)
+        public void Buy(Buyer buyer, Product product)
         {
-            double price = product.GetDiscountPrice(user);
-            user.ReduceBalance(price);
+            double price = product.GetDiscountPrice(buyer);
+            buyer.ReduceBalance(price);
             if (price< product.Price)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"{user.Name} купил {product.Name} со скидкой (");
+                Console.Write($"{buyer.Name} купил {product.Name} со скидкой (");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"{ product.Price}");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -32,7 +33,7 @@ namespace Shop.Bl.Model
             }
             else
             {
-                Console.WriteLine($"{user.Name} купил {product.Name} за {price}. Заказ отправлен на склад");
+                Console.WriteLine($"{buyer.Name} купил {product.Name} за {price}. Заказ отправлен на склад");
             }
             
         }

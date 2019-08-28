@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Informer.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\User.cs" />
@@ -48,6 +50,8 @@
     <Compile Include="Product\Mouse.cs" />
     <Compile Include="Product\MousePad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\Admin.cs" />
+    <Compile Include="User\Buyer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

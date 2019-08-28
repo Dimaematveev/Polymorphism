@@ -23,7 +23,7 @@ namespace Shop.BL.Product
             Price = price;
             Composition = composition;
         }
-        internal override double GetDiscountPrice(User user)
+        internal override double GetDiscountPrice(User.Buyer buyer)
         {
             return Price/5;
         }
