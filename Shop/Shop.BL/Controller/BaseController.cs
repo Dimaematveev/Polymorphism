@@ -12,16 +12,21 @@ namespace Shop.BL.Controller
     {
         public T Load<T>(string pathFile)
         {
-            // создаем объект BinaryFormatter
-            BinaryFormatter formatter = new BinaryFormatter();
-            T varible;
-            // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream(pathFile, FileMode.OpenOrCreate))
+            var formatter = new BinaryFormatter();
+            using (var fs = new FileStream(pathFile, FileMode.OpenOrCreate))
             {
-                varible=(T)formatter.Deserialize(fs);
+
+                if (fs.Length > 0 && formatter.Deserialize(fs) is T varible)
+                {
+                    return varible;
+                }
+                else
+                {
+                    return default(T);
+                }
+
             }
-            return varible;
-            
+
         }
         public void Save<T>(T Users, string pathFile)
         {

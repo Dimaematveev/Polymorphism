@@ -12,9 +12,9 @@ namespace Shop.BL.Controller
 
         public List<Model.Product> Products;
         public bool NewProduct = false;
-        public ProductController(string name)
+        public ProductController()
         {
-            Products = Load<List<Model.Product>>(PRODUCTS_PACH_NAME);
+            Products = Load<List<Model.Product>>(PRODUCTS_PACH_NAME) ?? new List<Model.Product>();
         }
 
         public void AddNewProduct(Model.Product product)

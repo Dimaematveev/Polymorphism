@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.CMD.ProductCMD
 {
+    [Serializable]
     public class KeyboardCMD : Keyboard, IToConsole
     {
         public KeyboardCMD(string name,

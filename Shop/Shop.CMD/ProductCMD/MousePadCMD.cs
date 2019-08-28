@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.CMD.ProductCMD
 {
+    [Serializable]
     public class MousePadCMD : MousePad,IToConsole
     {
         public MousePadCMD(string name,

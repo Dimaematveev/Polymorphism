@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Shop.CMD.ProductCMD
 {
+    [Serializable]
     public class MouseCMD : Mouse,IToConsole
     {
         public MouseCMD(string name,

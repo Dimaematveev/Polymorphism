@@ -17,8 +17,8 @@ namespace Shop.BL.Controller
 
         public UserController(string name)
         {
-            Users=Load<List<Model.User>>(USERS_PACH_NAME);
-            NewUser= (Users.FindIndex(u => u.Name == name)==-1);
+            Users=Load<List<Model.User>>(USERS_PACH_NAME)?? new List<Model.User>();
+            NewUser = (Users.FindIndex(u => u.Name == name)==-1);
            
         }
 

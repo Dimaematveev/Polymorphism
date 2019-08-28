@@ -18,13 +18,13 @@ namespace Shop.CMD
     {
         static void Main(string[] args)
         {
-            Buyer buyer = new Buyer("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
-
+            //Buyer buyer = new Buyer("Artem","123456","123456","Улица Пушкина, дом Колотушкина",100000,550);
+            UserController userController;
             do
             {
                 Console.WriteLine("Введите имя пользователя:");
                 string nameUser = Console.ReadLine();
-                UserController userController = new UserController(nameUser);
+                userController = new UserController(nameUser);
 
                 if (userController.NewUser)
                 {
@@ -55,26 +55,35 @@ namespace Shop.CMD
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             } while (false);
+
+            Buyer buyer = (Buyer)userController.CurrentUser;
+
+            ProductController productController = new ProductController();
+            
+
             Product keyBor = new KeyboardCMD("Ультра Клавиатура!", 400,"Log",25 );
 
             Product mouseGeat = new MouseCMD(  "Мышь крутая",  500, "Log"  );
 
             Product gamePad = new MousePadCMD(   "Супер коврик",  700,  "Game",  "700 pdi"  );
-           
 
-            Product[] products = new Product[] {
-                keyBor,
-                mouseGeat,
-                gamePad,
-            };
-            Product product1 = new Model.ProductCMD();
-            product1 = keyBor;
+            productController.AddNewProduct(keyBor);
+            productController.AddNewProduct(mouseGeat);
+            productController.AddNewProduct(gamePad);
+            //Product[] products = new Product[] {
+            //    keyBor,
+            //    mouseGeat,
+            //    gamePad,
+            //};
+
+            //Product product1 = new Model.ProductCMD();
+            //product1 = keyBor;
             Informer informer = new Informer();
 
             while (true)
             {
                 Console.WriteLine("Список товаров:");
-                foreach (var product in products)
+                foreach (var product in productController.Products)
                 {
                     ((IToConsole)product).ToConsole();
                     Console.WriteLine(new String('-', 25));
@@ -82,22 +91,23 @@ namespace Shop.CMD
                 Console.WriteLine();
                 Console.WriteLine($"Здравствуйте {buyer.Name} ваш баланс {buyer.Balance}");
 
-                for (int i = 0; i < products.Length; i++)
+                int i = 0;
+                foreach (var product in productController.Products)
                 {
-                    Console.WriteLine($"Товар {i} {products[i].Name} по цене {products[i].Price}");
+                    Console.WriteLine($"Товар {i++} {product.Name} по цене {product.Price}");
                 }
                 Console.WriteLine("Выберете номер товара и нажмите Enter:");
 
                 string str = Console.ReadLine();
                 int productNumber = Convert.ToInt32(str);
                 Console.Clear();
-                if (productNumber >= 0 && productNumber < products.Length)
+                if (productNumber >= 0 && productNumber < productController.Products.Count)
                 {
 
-                    if (products[productNumber].Price < buyer.Balance)
+                    if (productController.Products[productNumber].Price < buyer.Balance)
                     {
                         
-                        informer.Buy(buyer, products[productNumber]);
+                        informer.Buy(buyer, productController.Products[productNumber]);
                         Console.WriteLine();
                     }
                     else
