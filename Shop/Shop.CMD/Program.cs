@@ -25,24 +25,42 @@ namespace Shop.CMD
             {
                 Console.WriteLine("Введите имя пользователя:");
                 string nameUser = Console.ReadLine();
+                string pass = null;
                 userController = new UserController(nameUser);
 
                 if (userController.NewUser)
                 {
-                    Console.WriteLine("Новый пользователь!");
-                    Console.WriteLine("Введите пароль пользователя");
-                    string passNew = Console.ReadLine();
-                    Console.WriteLine("Повторите пароль пользователя");
-                    string passRet = Console.ReadLine();
-                    userController.AddNewUser<BuyerCMD>(nameUser, passNew, passRet);
-                    userController.SelectUser(nameUser, passNew);
+                    do
+                    {
+                        Console.WriteLine("Новый пользователь!");
+                        Console.WriteLine("Введите пароль пользователя");
+                        string passNew = Console.ReadLine();
+                        Console.WriteLine("Повторите пароль пользователя");
+                        string passRet = Console.ReadLine();
+                        if (passNew!= passRet)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Неправильный повторили пароль!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            userController.AddNewUser(nameUser, passNew, passRet);
+                            pass = passNew;
+                            break;
+                        }
+                        
+                    } while (true);
+                   
                 }
-                else
+                
+                if (pass==null)
                 {
                     Console.WriteLine("Введите пароль пользователя");
-                    string pass = Console.ReadLine();
-                    userController.SelectUser(nameUser, pass);
+                    pass = Console.ReadLine();
                 }
+                userController.SelectUser(nameUser, pass);
+               
                 if (userController.CurrentUser == null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -59,7 +77,7 @@ namespace Shop.CMD
 
 
             ProductController productController = new ProductController();
-            if (userController.CurrentUser is BuyerCMD buyer)
+            if (userController.CurrentUser is Buyer buyer)
             {
                 Informer informer = new Informer();
 
@@ -74,7 +92,7 @@ namespace Shop.CMD
                     Console.WriteLine();
 
 
-                    buyer.ToConsole();
+                   
                     Console.WriteLine($"Здравствуйте {buyer.Name} ваш баланс {buyer.Balance}");
 
                     int i = 0;

@@ -30,10 +30,9 @@ namespace Shop.BL.Controller
                 Save(Users, USERS_PACH_NAME);
             }
         }
-        public void AddNewUser<T>(string name,string passwordNew, string passwordReplay) where T:User.Buyer
+        public void AddNewUser(string name,string passwordNew, string passwordReplay)
         {
-           
-            CurrentUser = new T(name, passwordNew, passwordReplay);
+            CurrentUser = new User.Buyer(name, passwordNew, passwordReplay);
             if (CurrentUser==null)
             {
                 return;
