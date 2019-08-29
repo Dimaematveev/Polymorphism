@@ -12,5 +12,7 @@ namespace Shop.CMD.Controller
         public UserControllerCMD(string name) : base(name)
         {
         }
+
+
     }
 }
