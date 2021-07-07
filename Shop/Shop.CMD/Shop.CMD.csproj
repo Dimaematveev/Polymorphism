@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\UserControllerCMD.cs" />
     <Compile Include="Interfaces\IToConsole.cs" />
     <Compile Include="Model\ProductCMD.cs" />
     <Compile Include="ProductCMD\KeyboardCMD.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="ProductCMD\MousePadCMD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\BuyerCMD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
